@@ -543,10 +543,19 @@ export default function App() {
     setDailyMinutesUsed((n) => Math.max(0, n - 15));
   };
 
+  const primeSpeechSynthesis = () => {
+    window.speechSynthesis.cancel();
+    const warmup = new SpeechSynthesisUtterance(" ");
+    warmup.volume = 0;
+    utteranceRef.current = warmup;
+    window.speechSynthesis.speak(warmup);
+  };
+
   const selectAudioTrack = (track: "english" | "original") => {
     setAudioTrack(track);
     setShowAudioMenu(false);
     if (track === "english") {
+      primeSpeechSynthesis();
       if (isPlaying) startTranslation(OPENAI_KEY);
     } else {
       stopTranslation();
@@ -857,7 +866,16 @@ export default function App() {
                     setVideoError(null);
                     clearTimeout(hideTimerRef.current);
                     hideTimerRef.current = setTimeout(() => setControlsVisible(false), 3000);
-                    if (audioTrack === "english") startTranslation(OPENAI_KEY);
+                    if (audioTrack === "english") {
+                      // Re-apply ducking in case video.load() reset volume
+                      if (videoRef.current) {
+                        videoRef.current.muted = false;
+                        videoRef.current.volume = 0.15;
+                      }
+                      // Prime speech synthesis from this user gesture so async speak() works
+                      primeSpeechSynthesis();
+                      startTranslation(OPENAI_KEY);
+                    }
                   }}
                   onPause={() => {
                     setIsPlaying(false);
