@@ -42,7 +42,7 @@ const SAMPLE_VIDEOS: VideoItem[] = [
     duration: "28:45",
     thumbnail: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&h=225&fit=crop&auto=format",
     language: "French",
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    src: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4",
   },
   {
     id: "2",
@@ -60,7 +60,7 @@ const SAMPLE_VIDEOS: VideoItem[] = [
     duration: "42:18",
     thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=225&fit=crop&auto=format",
     language: "Spanish",
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
   },
 ];
 
